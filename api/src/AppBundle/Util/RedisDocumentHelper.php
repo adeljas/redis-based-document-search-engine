@@ -45,10 +45,12 @@ class RedisDocumentHelper
      */
     public function addDocument($userIdentifier, $contents)
     {
-        return $this->index->add([
+        $this->index->add([
             'contents' => $contents,
             'userIdentifier'=> $userIdentifier
         ]);
+
+        return $this->getDocument($userIdentifier);
     }
 
     /**

@@ -32,11 +32,16 @@ sudo a2enmod rewrite
 echo "-- Creating virtual hosts --"
 cat << EOF | sudo tee /etc/apache2/sites-available/000-default.conf
 <VirtualHost *:80>
-        ServerAdmin webmaster@localhost
-        DocumentRoot /var/www/app/web
-        ErrorLog ${APACHE_LOG_DIR}/error.log
-        CustomLog ${APACHE_LOG_DIR}/access.log combined
-		DirectoryIndex app.php
+
+    DocumentRoot /var/www/redis-based-document-search-engine/api/web
+    <Directory /var/www/redis-based-document-search-engine/api/web>
+        AllowOverride All
+        Order Allow,Deny
+        Allow from All
+    </Directory>
+
+    ErrorLog /var/log/apache2/project_error.log
+    CustomLog /var/log/apache2/project_access.log combined
 </VirtualHost>
 EOF
 sudo a2ensite default.conf
@@ -87,7 +92,12 @@ git clone https://github.com/adeljas/redis-based-document-search-engine.git
 
 sudo /etc/init.d/apache2 restart
 
-cd /var/www/redis-based-document-search-engine/api/
+cd /var/www/redis-based-document-search-engine
+
+sudo chown vagrant:vagrant . -R
+sudo chmod a+wx . -R
+
+cd /var/www/redis-based-document-search-engine/api
 
 composer install
 

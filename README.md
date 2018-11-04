@@ -24,7 +24,7 @@ AppBundle\Util\RedisDocumentHelper
     - PHP7.1
     - Apache2
     - RedisSearch ( Running on Docker )
-- install VirtualBox and Vagrant then
+- make sure you have "VirtualBox" and "Vagrant" installed
     - run "vagrant up" within the root directory
     - navigate to http://localhost:8080 and you'll find the ApiDoc page
     
