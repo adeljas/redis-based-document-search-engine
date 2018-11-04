@@ -30,7 +30,6 @@ sed -i "s/display_errors = .*/display_errors = On/" /etc/php/7.1/apache2/php.ini
 sudo a2enmod rewrite
 
 echo "-- Creating virtual hosts --"
-sudo ln -fs /vagrant/api/ /var/www/app
 cat << EOF | sudo tee /etc/apache2/sites-available/000-default.conf
 <VirtualHost *:80>
         ServerAdmin webmaster@localhost
@@ -82,12 +81,17 @@ sudo apt-get install -y --force-yes docker-ce
 
 sudo docker run -d -p 6379:6379 redislabs/redisearch:latest
 
-cd /vagrant/api/
+cd /var/www/
+
+git clone https://github.com/adeljas/redis-based-document-search-engine.git
+
+sudo /etc/init.d/apache2 restart
+
+cd /var/www/redis-based-document-search-engine/api/
 
 composer install
 
 php bin/console cache:clear --env=prod
 php bin/console cache:clear --env=dev
-
 
 ######################
