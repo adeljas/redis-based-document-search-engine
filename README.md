@@ -28,5 +28,6 @@ There are 3 key files:
 - make sure you have "VirtualBox" and "Vagrant" installed, afterwards :
     - run "vagrant up" within the root directory
     - navigate to http://localhost:8080 and you'll find the ApiDoc page
+    - note: this clones the project inside the vagrant box, I did it this way to improve the performance of the project, you need to set up file sync between your IDE and the vagrant box, you can use vagrant@localhost:2222, password 'vagrant' to access the files through sftp  
     
     

@@ -94,8 +94,6 @@ sudo /etc/init.d/apache2 restart
 
 cd /var/www/redis-based-document-search-engine
 
-sudo chown vagrant:vagrant . -R
-sudo chmod a+wx . -R
 
 cd /var/www/redis-based-document-search-engine/api
 
@@ -104,4 +102,7 @@ composer install
 php bin/console cache:clear --env=prod
 php bin/console cache:clear --env=dev
 
+sudo chown vagrant:vagrant . -R
+sudo chmod a+wx . -R
+echo "-- navigate to http://localhost:8080/ --"
 ######################
